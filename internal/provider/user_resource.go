@@ -40,7 +40,6 @@ type UserResourceModel struct {
 	Name           types.String `tfsdk:"name"`
 	OrganizationID types.String `tfsdk:"organization_id"`
 	Role           types.String `tfsdk:"role"`
-	Status         types.Number `tfsdk:"status"`
 	UserID         types.String `tfsdk:"user_id"`
 }
 
@@ -106,10 +105,6 @@ func (r *UserResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				},
 				MarkdownDescription: `must be one of [admin, developer]` + "\n" +
 					`Role of the member in the organization.`,
-			},
-			"status": schema.NumberAttribute{
-				Computed:    true,
-				Description: `HTTP status code.`,
 			},
 			"user_id": schema.StringAttribute{
 				Computed:    true,

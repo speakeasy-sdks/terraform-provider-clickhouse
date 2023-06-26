@@ -26,25 +26,25 @@ func (r *ServiceResourceModel) ToCreateSDKType() *shared.ServicePostRequest {
 	idleTimeoutMinutes, _ := r.IdleTimeoutMinutes.ValueBigFloat().Float64()
 	ipAccessList := make([]shared.IPAccessListEntry, 0)
 	for _, ipAccessListItem := range r.IPAccessList {
-		description := new(string)
-		if !ipAccessListItem.Description.IsUnknown() && !ipAccessListItem.Description.IsNull() {
-			*description = ipAccessListItem.Description.ValueString()
-		} else {
-			description = nil
-		}
-		source := new(string)
-		if !ipAccessListItem.Source.IsUnknown() && !ipAccessListItem.Source.IsNull() {
-			*source = ipAccessListItem.Source.ValueString()
-		} else {
-			source = nil
-		}
+		description := ipAccessListItem.Description.ValueString()
+		source := ipAccessListItem.Source.ValueString()
 		ipAccessList = append(ipAccessList, shared.IPAccessListEntry{
 			Description: description,
 			Source:      source,
 		})
 	}
-	maxTotalMemoryGb, _ := r.MaxTotalMemoryGb.ValueBigFloat().Float64()
-	minTotalMemoryGb, _ := r.MinTotalMemoryGb.ValueBigFloat().Float64()
+	maxTotalMemoryGb := new(float64)
+	if !r.MaxTotalMemoryGb.IsUnknown() && !r.MaxTotalMemoryGb.IsNull() {
+		*maxTotalMemoryGb, _ = r.MaxTotalMemoryGb.ValueBigFloat().Float64()
+	} else {
+		maxTotalMemoryGb = nil
+	}
+	minTotalMemoryGb := new(float64)
+	if !r.MinTotalMemoryGb.IsUnknown() && !r.MinTotalMemoryGb.IsNull() {
+		*minTotalMemoryGb, _ = r.MinTotalMemoryGb.ValueBigFloat().Float64()
+	} else {
+		minTotalMemoryGb = nil
+	}
 	name := r.Name.ValueString()
 	region := shared.ServicePostRequestRegion(r.Region.ValueString())
 	tier := shared.ServicePostRequestTier(r.Tier.ValueString())
@@ -138,16 +138,8 @@ func (r *ServiceResourceModel) RefreshFromGetResponse(resp *shared.Service) {
 	r.IPAccessList = nil
 	for _, ipAccessListItem := range resp.IPAccessList {
 		var ipAccessList1 IPAccessListEntry
-		if ipAccessListItem.Description != nil {
-			ipAccessList1.Description = types.StringValue(*ipAccessListItem.Description)
-		} else {
-			ipAccessList1.Description = types.StringNull()
-		}
-		if ipAccessListItem.Source != nil {
-			ipAccessList1.Source = types.StringValue(*ipAccessListItem.Source)
-		} else {
-			ipAccessList1.Source = types.StringNull()
-		}
+		ipAccessList1.Description = types.StringValue(ipAccessListItem.Description)
+		ipAccessList1.Source = types.StringValue(ipAccessListItem.Source)
 		r.IPAccessList = append(r.IPAccessList, ipAccessList1)
 	}
 	if resp.MaxTotalMemoryGb != nil {

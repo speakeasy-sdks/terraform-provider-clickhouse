@@ -29,7 +29,6 @@ Role of the member in the organization.
 - `id` (String) Unique invitation ID.
 - `joined_at` (String) Timestamp the member joined the organization. ISO-8601.
 - `name` (String) Name of the member as set a personal user profile.
-- `status` (Number) HTTP status code.
 - `user_id` (String) Unique user ID. If a user is a member in multiple organizations this ID will stay the same.
 
 

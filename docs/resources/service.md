@@ -20,8 +20,6 @@ Service Resource
 - `idle_scaling` (Boolean) When set to true the service is allowed to scale down to zero when idle. Always true for development services.
 - `idle_timeout_minutes` (Number) Set minimum idling timeout (in minutes). Must be &gt;= 5 minutes.
 - `ip_access_list` (Attributes List) List of IP addresses allowed to access the service (see [below for nested schema](#nestedatt--ip_access_list))
-- `max_total_memory_gb` (Number) Maximum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and lower than 360 for non paid services or 720 for paid services.
-- `min_total_memory_gb` (Number) Minimum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and greater than 24.
 - `name` (String) Name of the service.
 - `organization_id` (String) ID of the organization that will own the service.
 - `region` (String) must be one of [ap-south-1, ap-southeast-1, eu-central-1, eu-west-1, us-east-1, us-east-2, us-west-2, us-central1, europe-west4, asia-southeast1]
@@ -34,6 +32,8 @@ Tier of the service: 'development', 'production', 'dedicated_high_mem', 'dedicat
 - `backup_id` (String) Optional backup ID used as an initial state for the new service. When used the region and the tier of the new instance must be the same as the values of the original instance.
 - `cloud_provider` (String) must be one of [aws, gcp]
 Cloud provider
+- `max_total_memory_gb` (Number) Maximum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and lower than 360 for non paid services or 720 for paid services.
+- `min_total_memory_gb` (Number) Minimum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and greater than 24.
 
 ### Read-Only
 
@@ -43,12 +43,11 @@ Cloud provider
 - `password` (String) Password for the newly created service.
 - `state` (String) must be one of [starting, stopping, terminating, provisioning, running, stopped, terminated, degraded, failed, idle]
 Current state of the service.
-- `status` (Number) HTTP status code.
 
 <a id="nestedatt--ip_access_list"></a>
 ### Nested Schema for `ip_access_list`
 
-Optional:
+Required:
 
 - `description` (String) IPv4 address or IPv4 CIDR to allow access from
 - `source` (String) IP or CIDR

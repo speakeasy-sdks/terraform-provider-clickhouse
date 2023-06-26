@@ -19,6 +19,10 @@ variable "orgID" {
   type = string
 }
 
+variable "myIP" {
+  type = string
+}
+
 provider "clickhouse" {
   username = var.keyID
   password = var.keySecret
@@ -26,5 +30,17 @@ provider "clickhouse" {
 
 resource "clickhouse_service" "test" {
   organization_id = var.orgID
+  cloud_provider  = "gcp"
+  idle_scaling    = true
+  ip_access_list = [
+    {
+      source      = var.myIP
+      description = "my IP"
+    }
+  ]
+  idle_timeout_minutes = 10
 
+  name   = "Speakeasy Test Instance"
+  region = "us-central1"
+  tier   = "development"
 }

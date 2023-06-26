@@ -17,15 +17,11 @@ type PostV1OrganizationsOrganizationIDKeysRequest struct {
 type PostV1OrganizationsOrganizationIDKeys400ApplicationJSON struct {
 	// Detailed error description.
 	Error *string `json:"error,omitempty"`
-	// HTTP status code.
-	Status *float64 `json:"status,omitempty"`
 }
 
 // PostV1OrganizationsOrganizationIDKeys200ApplicationJSON - Successful response
 type PostV1OrganizationsOrganizationIDKeys200ApplicationJSON struct {
 	Result *shared.APIKeyPostResponse `json:"result,omitempty"`
-	// HTTP status code.
-	Status *float64 `json:"status,omitempty"`
 }
 
 type PostV1OrganizationsOrganizationIDKeysResponse struct {

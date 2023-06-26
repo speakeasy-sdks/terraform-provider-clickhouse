@@ -143,7 +143,17 @@ func New(opts ...SDKOption) *SDK {
 
 // DeleteV1OrganizationsOrganizationIDInvitationsInvitationID - Delete organization invitation
 // Deletes a single organization invitation.
-func (s *SDK) DeleteV1OrganizationsOrganizationIDInvitationsInvitationID(ctx context.Context, request operations.DeleteV1OrganizationsOrganizationIDInvitationsInvitationIDRequest) (*operations.DeleteV1OrganizationsOrganizationIDInvitationsInvitationIDResponse, error) {
+func (s *SDK) DeleteV1OrganizationsOrganizationIDInvitationsInvitationID(ctx context.Context, request operations.DeleteV1OrganizationsOrganizationIDInvitationsInvitationIDRequest, opts ...operations.Option) (*operations.DeleteV1OrganizationsOrganizationIDInvitationsInvitationIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/invitations/{invitationId}", request, nil)
 	if err != nil {
@@ -159,7 +169,29 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDInvitationsInvitationID(ctx con
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -173,6 +205,7 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDInvitationsInvitationID(ctx con
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -190,7 +223,17 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDInvitationsInvitationID(ctx con
 
 // DeleteV1OrganizationsOrganizationIDKeysKeyID - Delete key
 // Deletes API key. Only a key not used to authenticate the active request can be deleted.
-func (s *SDK) DeleteV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, request operations.DeleteV1OrganizationsOrganizationIDKeysKeyIDRequest) (*operations.DeleteV1OrganizationsOrganizationIDKeysKeyIDResponse, error) {
+func (s *SDK) DeleteV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, request operations.DeleteV1OrganizationsOrganizationIDKeysKeyIDRequest, opts ...operations.Option) (*operations.DeleteV1OrganizationsOrganizationIDKeysKeyIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/keys/{keyId}", request, nil)
 	if err != nil {
@@ -206,7 +249,29 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, 
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -220,6 +285,7 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, 
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -237,7 +303,17 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, 
 
 // DeleteV1OrganizationsOrganizationIDMembersUserID - Remove an organization member
 // Removes a user from the organization
-func (s *SDK) DeleteV1OrganizationsOrganizationIDMembersUserID(ctx context.Context, request operations.DeleteV1OrganizationsOrganizationIDMembersUserIDRequest) (*operations.DeleteV1OrganizationsOrganizationIDMembersUserIDResponse, error) {
+func (s *SDK) DeleteV1OrganizationsOrganizationIDMembersUserID(ctx context.Context, request operations.DeleteV1OrganizationsOrganizationIDMembersUserIDRequest, opts ...operations.Option) (*operations.DeleteV1OrganizationsOrganizationIDMembersUserIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/members/{userId}", request, nil)
 	if err != nil {
@@ -253,7 +329,29 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDMembersUserID(ctx context.Conte
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -267,6 +365,7 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDMembersUserID(ctx context.Conte
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -284,7 +383,17 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDMembersUserID(ctx context.Conte
 
 // DeleteV1OrganizationsOrganizationIDServicesServiceID - Delete service.
 // Deletes the service. The service must be in stopped state and is deleted asynchronously after this method call.
-func (s *SDK) DeleteV1OrganizationsOrganizationIDServicesServiceID(ctx context.Context, request operations.DeleteV1OrganizationsOrganizationIDServicesServiceIDRequest) (*operations.DeleteV1OrganizationsOrganizationIDServicesServiceIDResponse, error) {
+func (s *SDK) DeleteV1OrganizationsOrganizationIDServicesServiceID(ctx context.Context, request operations.DeleteV1OrganizationsOrganizationIDServicesServiceIDRequest, opts ...operations.Option) (*operations.DeleteV1OrganizationsOrganizationIDServicesServiceIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services/{serviceId}", request, nil)
 	if err != nil {
@@ -300,7 +409,29 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDServicesServiceID(ctx context.C
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -314,6 +445,7 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDServicesServiceID(ctx context.C
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -331,7 +463,17 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDServicesServiceID(ctx context.C
 
 // GetV1OrganizationsOrganizationIDActivities - List of organization activities
 // Returns a list of all organization activities.
-func (s *SDK) GetV1OrganizationsOrganizationIDActivities(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDActivitiesRequest) (*operations.GetV1OrganizationsOrganizationIDActivitiesResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDActivities(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDActivitiesRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDActivitiesResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/activities", request, nil)
 	if err != nil {
@@ -347,7 +489,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivities(ctx context.Context, re
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -361,6 +525,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivities(ctx context.Context, re
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -397,7 +562,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivities(ctx context.Context, re
 
 // GetV1OrganizationsOrganizationIDActivitiesActivityID - Organization activity
 // Returns a single organization activity by ID.
-func (s *SDK) GetV1OrganizationsOrganizationIDActivitiesActivityID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDActivitiesActivityIDRequest) (*operations.GetV1OrganizationsOrganizationIDActivitiesActivityIDResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDActivitiesActivityID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDActivitiesActivityIDRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDActivitiesActivityIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/activities/{activityId}", request, nil)
 	if err != nil {
@@ -413,7 +588,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivitiesActivityID(ctx context.C
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -427,6 +624,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivitiesActivityID(ctx context.C
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -463,7 +661,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivitiesActivityID(ctx context.C
 
 // GetV1OrganizationsOrganizationIDInvitations - List all invitations
 // Returns list of all organization invitations.
-func (s *SDK) GetV1OrganizationsOrganizationIDInvitations(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDInvitationsRequest) (*operations.GetV1OrganizationsOrganizationIDInvitationsResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDInvitations(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDInvitationsRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDInvitationsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/invitations", request, nil)
 	if err != nil {
@@ -479,7 +687,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitations(ctx context.Context, r
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -493,6 +723,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitations(ctx context.Context, r
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -529,7 +760,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitations(ctx context.Context, r
 
 // GetV1OrganizationsOrganizationIDInvitationsInvitationID - Get invitation details
 // Returns details for a single organization invitation.
-func (s *SDK) GetV1OrganizationsOrganizationIDInvitationsInvitationID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDInvitationsInvitationIDRequest) (*operations.GetV1OrganizationsOrganizationIDInvitationsInvitationIDResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDInvitationsInvitationID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDInvitationsInvitationIDRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDInvitationsInvitationIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/invitations/{invitationId}", request, nil)
 	if err != nil {
@@ -545,7 +786,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitationsInvitationID(ctx contex
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -559,6 +822,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitationsInvitationID(ctx contex
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -595,7 +859,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitationsInvitationID(ctx contex
 
 // GetV1OrganizationsOrganizationIDKeys - Get list of all keys
 // Returns a list of all keys in the organization.
-func (s *SDK) GetV1OrganizationsOrganizationIDKeys(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDKeysRequest) (*operations.GetV1OrganizationsOrganizationIDKeysResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDKeys(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDKeysRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDKeysResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/keys", request, nil)
 	if err != nil {
@@ -611,7 +885,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeys(ctx context.Context, request 
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -625,6 +921,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeys(ctx context.Context, request 
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -661,7 +958,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeys(ctx context.Context, request 
 
 // GetV1OrganizationsOrganizationIDKeysKeyID - Get key details
 // Returns a single key details.
-func (s *SDK) GetV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDKeysKeyIDRequest) (*operations.GetV1OrganizationsOrganizationIDKeysKeyIDResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDKeysKeyIDRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDKeysKeyIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/keys/{keyId}", request, nil)
 	if err != nil {
@@ -677,7 +984,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, req
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -691,6 +1020,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, req
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -727,7 +1057,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, req
 
 // GetV1OrganizationsOrganizationIDMembers - List organization members
 // Returns a list of all members in the organization.
-func (s *SDK) GetV1OrganizationsOrganizationIDMembers(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDMembersRequest) (*operations.GetV1OrganizationsOrganizationIDMembersResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDMembers(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDMembersRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDMembersResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/members", request, nil)
 	if err != nil {
@@ -743,7 +1083,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembers(ctx context.Context, reque
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -757,6 +1119,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembers(ctx context.Context, reque
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -793,7 +1156,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembers(ctx context.Context, reque
 
 // GetV1OrganizationsOrganizationIDMembersUserID - Get member details
 // Returns a single organization member details.
-func (s *SDK) GetV1OrganizationsOrganizationIDMembersUserID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDMembersUserIDRequest) (*operations.GetV1OrganizationsOrganizationIDMembersUserIDResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDMembersUserID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDMembersUserIDRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDMembersUserIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/members/{userId}", request, nil)
 	if err != nil {
@@ -809,7 +1182,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembersUserID(ctx context.Context,
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -823,6 +1218,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembersUserID(ctx context.Context,
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -859,7 +1255,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembersUserID(ctx context.Context,
 
 // GetV1OrganizationsOrganizationIDServicesServiceID - Get service details
 // Returns a service that belongs to the organization
-func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDServicesServiceIDRequest) (*operations.GetV1OrganizationsOrganizationIDServicesServiceIDResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDServicesServiceIDRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDServicesServiceIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services/{serviceId}", request, nil)
 	if err != nil {
@@ -875,7 +1281,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceID(ctx context.Cont
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -889,6 +1317,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceID(ctx context.Cont
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -925,7 +1354,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceID(ctx context.Cont
 
 // GetV1OrganizationsOrganizationIDServicesServiceIDBackups - List of service backups
 // Returns a list of all backups for the service.
-func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackups(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDServicesServiceIDBackupsRequest) (*operations.GetV1OrganizationsOrganizationIDServicesServiceIDBackupsResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackups(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDServicesServiceIDBackupsRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDServicesServiceIDBackupsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services/{serviceId}/backups", request, nil)
 	if err != nil {
@@ -941,7 +1380,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackups(ctx conte
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -955,6 +1416,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackups(ctx conte
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -991,7 +1453,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackups(ctx conte
 
 // GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupID - Get backup details
 // Returns a single backup info.
-func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupIDRequest) (*operations.GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupIDResponse, error) {
+func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupID(ctx context.Context, request operations.GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupIDRequest, opts ...operations.Option) (*operations.GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services/{serviceId}/backups/{backupId}", request, nil)
 	if err != nil {
@@ -1007,7 +1479,29 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupID(c
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1021,6 +1515,7 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupID(c
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1057,7 +1552,17 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupID(c
 
 // PatchV1OrganizationsOrganizationIDKeysKeyID - Update key
 // Updates API key properties.
-func (s *SDK) PatchV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDKeysKeyIDRequest) (*operations.PatchV1OrganizationsOrganizationIDKeysKeyIDResponse, error) {
+func (s *SDK) PatchV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDKeysKeyIDRequest, opts ...operations.Option) (*operations.PatchV1OrganizationsOrganizationIDKeysKeyIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/keys/{keyId}", request, nil)
 	if err != nil {
@@ -1080,7 +1585,29 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, r
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1094,6 +1621,7 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, r
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1130,7 +1658,17 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, r
 
 // PatchV1OrganizationsOrganizationIDMembersUserID - Update organization member.
 // Updates organization member role.
-func (s *SDK) PatchV1OrganizationsOrganizationIDMembersUserID(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDMembersUserIDRequest) (*operations.PatchV1OrganizationsOrganizationIDMembersUserIDResponse, error) {
+func (s *SDK) PatchV1OrganizationsOrganizationIDMembersUserID(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDMembersUserIDRequest, opts ...operations.Option) (*operations.PatchV1OrganizationsOrganizationIDMembersUserIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/members/{userId}", request, nil)
 	if err != nil {
@@ -1153,7 +1691,29 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDMembersUserID(ctx context.Contex
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1167,6 +1727,7 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDMembersUserID(ctx context.Contex
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1203,7 +1764,17 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDMembersUserID(ctx context.Contex
 
 // PatchV1OrganizationsOrganizationIDServicesServiceID - Update service basic details.
 // Updates basic service details like service name or IP access list.
-func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceID(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDServicesServiceIDRequest) (*operations.PatchV1OrganizationsOrganizationIDServicesServiceIDResponse, error) {
+func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceID(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDServicesServiceIDRequest, opts ...operations.Option) (*operations.PatchV1OrganizationsOrganizationIDServicesServiceIDResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services/{serviceId}", request, nil)
 	if err != nil {
@@ -1226,7 +1797,29 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceID(ctx context.Co
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1240,6 +1833,7 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceID(ctx context.Co
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1276,7 +1870,17 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceID(ctx context.Co
 
 // PatchV1OrganizationsOrganizationIDServicesServiceIDPassword - Update service password.
 // Sets a new password for the service
-func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDPassword(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDServicesServiceIDPasswordRequest) (*operations.PatchV1OrganizationsOrganizationIDServicesServiceIDPasswordResponse, error) {
+func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDPassword(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDServicesServiceIDPasswordRequest, opts ...operations.Option) (*operations.PatchV1OrganizationsOrganizationIDServicesServiceIDPasswordResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services/{serviceId}/password", request, nil)
 	if err != nil {
@@ -1299,7 +1903,29 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDPassword(ctx co
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1313,6 +1939,7 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDPassword(ctx co
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1349,7 +1976,17 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDPassword(ctx co
 
 // PatchV1OrganizationsOrganizationIDServicesServiceIDScaling - Update service auto scaling settings.
 // Updates minimum and maximum total memory limits and idle mode scaling behavior for the service. The memory settings are available only for "production" services and must be a multiple of 12 starting from 24GB.
-func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDScaling(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDServicesServiceIDScalingRequest) (*operations.PatchV1OrganizationsOrganizationIDServicesServiceIDScalingResponse, error) {
+func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDScaling(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDServicesServiceIDScalingRequest, opts ...operations.Option) (*operations.PatchV1OrganizationsOrganizationIDServicesServiceIDScalingResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services/{serviceId}/scaling", request, nil)
 	if err != nil {
@@ -1372,7 +2009,29 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDScaling(ctx con
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1386,6 +2045,7 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDScaling(ctx con
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1422,7 +2082,17 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDScaling(ctx con
 
 // PatchV1OrganizationsOrganizationIDServicesServiceIDState - Update service state.
 // Starts or stop service
-func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDState(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDServicesServiceIDStateRequest) (*operations.PatchV1OrganizationsOrganizationIDServicesServiceIDStateResponse, error) {
+func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDState(ctx context.Context, request operations.PatchV1OrganizationsOrganizationIDServicesServiceIDStateRequest, opts ...operations.Option) (*operations.PatchV1OrganizationsOrganizationIDServicesServiceIDStateResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services/{serviceId}/state", request, nil)
 	if err != nil {
@@ -1445,7 +2115,29 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDState(ctx conte
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1459,6 +2151,7 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDState(ctx conte
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1495,7 +2188,17 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDState(ctx conte
 
 // PostV1OrganizationsOrganizationIDInvitations - Create an invitation
 // Creates organization invitation.
-func (s *SDK) PostV1OrganizationsOrganizationIDInvitations(ctx context.Context, request operations.PostV1OrganizationsOrganizationIDInvitationsRequest) (*operations.PostV1OrganizationsOrganizationIDInvitationsResponse, error) {
+func (s *SDK) PostV1OrganizationsOrganizationIDInvitations(ctx context.Context, request operations.PostV1OrganizationsOrganizationIDInvitationsRequest, opts ...operations.Option) (*operations.PostV1OrganizationsOrganizationIDInvitationsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/invitations", request, nil)
 	if err != nil {
@@ -1518,7 +2221,29 @@ func (s *SDK) PostV1OrganizationsOrganizationIDInvitations(ctx context.Context, 
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1532,6 +2257,7 @@ func (s *SDK) PostV1OrganizationsOrganizationIDInvitations(ctx context.Context, 
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1568,7 +2294,17 @@ func (s *SDK) PostV1OrganizationsOrganizationIDInvitations(ctx context.Context, 
 
 // PostV1OrganizationsOrganizationIDKeys - Create key
 // Creates new API key.
-func (s *SDK) PostV1OrganizationsOrganizationIDKeys(ctx context.Context, request operations.PostV1OrganizationsOrganizationIDKeysRequest) (*operations.PostV1OrganizationsOrganizationIDKeysResponse, error) {
+func (s *SDK) PostV1OrganizationsOrganizationIDKeys(ctx context.Context, request operations.PostV1OrganizationsOrganizationIDKeysRequest, opts ...operations.Option) (*operations.PostV1OrganizationsOrganizationIDKeysResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/keys", request, nil)
 	if err != nil {
@@ -1591,7 +2327,29 @@ func (s *SDK) PostV1OrganizationsOrganizationIDKeys(ctx context.Context, request
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1605,6 +2363,7 @@ func (s *SDK) PostV1OrganizationsOrganizationIDKeys(ctx context.Context, request
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1641,7 +2400,17 @@ func (s *SDK) PostV1OrganizationsOrganizationIDKeys(ctx context.Context, request
 
 // PostV1OrganizationsOrganizationIDServices - Create new service
 // Creates a new service in the organization, and returns the current service state and a password to access the service. The service is started asynchronously.
-func (s *SDK) PostV1OrganizationsOrganizationIDServices(ctx context.Context, request operations.PostV1OrganizationsOrganizationIDServicesRequest) (*operations.PostV1OrganizationsOrganizationIDServicesResponse, error) {
+func (s *SDK) PostV1OrganizationsOrganizationIDServices(ctx context.Context, request operations.PostV1OrganizationsOrganizationIDServicesRequest, opts ...operations.Option) (*operations.PostV1OrganizationsOrganizationIDServicesResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/organizations/{organizationId}/services", request, nil)
 	if err != nil {
@@ -1664,7 +2433,29 @@ func (s *SDK) PostV1OrganizationsOrganizationIDServices(ctx context.Context, req
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 5000,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  150000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"4XX",
+			"5XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1678,6 +2469,7 @@ func (s *SDK) PostV1OrganizationsOrganizationIDServices(ctx context.Context, req
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 

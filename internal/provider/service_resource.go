@@ -49,7 +49,6 @@ type ServiceResourceModel struct {
 	Password           types.String        `tfsdk:"password"`
 	Region             types.String        `tfsdk:"region"`
 	State              types.String        `tfsdk:"state"`
-	Status             types.Number        `tfsdk:"status"`
 	Tier               types.String        `tfsdk:"tier"`
 }
 
@@ -141,13 +140,11 @@ func (r *ServiceResource) Schema(ctx context.Context, req resource.SchemaRequest
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
-							Computed:    true,
-							Optional:    true,
+							Required:    true,
 							Description: `IPv4 address or IPv4 CIDR to allow access from`,
 						},
 						"source": schema.StringAttribute{
-							Computed:    true,
-							Optional:    true,
+							Required:    true,
 							Description: `IP or CIDR`,
 						},
 					},
@@ -155,17 +152,19 @@ func (r *ServiceResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Description: `List of IP addresses allowed to access the service`,
 			},
 			"max_total_memory_gb": schema.NumberAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.Number{
 					numberplanmodifier.RequiresReplace(),
 				},
-				Required:    true,
+				Optional:    true,
 				Description: `Maximum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and lower than 360 for non paid services or 720 for paid services.`,
 			},
 			"min_total_memory_gb": schema.NumberAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.Number{
 					numberplanmodifier.RequiresReplace(),
 				},
-				Required:    true,
+				Optional:    true,
 				Description: `Minimum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and greater than 24.`,
 			},
 			"name": schema.StringAttribute{
@@ -223,10 +222,6 @@ func (r *ServiceResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 				MarkdownDescription: `must be one of [starting, stopping, terminating, provisioning, running, stopped, terminated, degraded, failed, idle]` + "\n" +
 					`Current state of the service.`,
-			},
-			"status": schema.NumberAttribute{
-				Computed:    true,
-				Description: `HTTP status code.`,
 			},
 			"tier": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{

@@ -4,7 +4,7 @@ package shared
 
 type IPAccessListEntry struct {
 	// IPv4 address or IPv4 CIDR to allow access from
-	Description *string `json:"description,omitempty"`
+	Description string `json:"description"`
 	// IP or CIDR
-	Source *string `json:"source,omitempty"`
+	Source string `json:"source"`
 }

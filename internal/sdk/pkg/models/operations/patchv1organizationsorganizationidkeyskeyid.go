@@ -19,15 +19,11 @@ type PatchV1OrganizationsOrganizationIDKeysKeyIDRequest struct {
 type PatchV1OrganizationsOrganizationIDKeysKeyID400ApplicationJSON struct {
 	// Detailed error description.
 	Error *string `json:"error,omitempty"`
-	// HTTP status code.
-	Status *float64 `json:"status,omitempty"`
 }
 
 // PatchV1OrganizationsOrganizationIDKeysKeyID200ApplicationJSON - Successful response
 type PatchV1OrganizationsOrganizationIDKeysKeyID200ApplicationJSON struct {
 	Result *shared.APIKey `json:"result,omitempty"`
-	// HTTP status code.
-	Status *float64 `json:"status,omitempty"`
 }
 
 type PatchV1OrganizationsOrganizationIDKeysKeyIDResponse struct {

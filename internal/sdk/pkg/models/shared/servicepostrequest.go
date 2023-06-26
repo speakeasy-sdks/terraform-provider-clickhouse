@@ -136,9 +136,9 @@ type ServicePostRequest struct {
 	// List of IP addresses allowed to access the service
 	IPAccessList []IPAccessListEntry `json:"ipAccessList"`
 	// Maximum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and lower than 360 for non paid services or 720 for paid services.
-	MaxTotalMemoryGb float64 `json:"maxTotalMemoryGb"`
+	MaxTotalMemoryGb *float64 `json:"maxTotalMemoryGb,omitempty"`
 	// Minimum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and greater than 24.
-	MinTotalMemoryGb float64 `json:"minTotalMemoryGb"`
+	MinTotalMemoryGb *float64 `json:"minTotalMemoryGb,omitempty"`
 	// Name of the service.
 	Name string `json:"name"`
 	// Service region.

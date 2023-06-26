@@ -18,15 +18,11 @@ type GetV1OrganizationsOrganizationIDServicesServiceIDRequest struct {
 type GetV1OrganizationsOrganizationIDServicesServiceID400ApplicationJSON struct {
 	// Detailed error description.
 	Error *string `json:"error,omitempty"`
-	// HTTP status code.
-	Status *float64 `json:"status,omitempty"`
 }
 
 // GetV1OrganizationsOrganizationIDServicesServiceID200ApplicationJSON - Successful response
 type GetV1OrganizationsOrganizationIDServicesServiceID200ApplicationJSON struct {
 	Result *shared.Service `json:"result,omitempty"`
-	// HTTP status code.
-	Status *float64 `json:"status,omitempty"`
 }
 
 type GetV1OrganizationsOrganizationIDServicesServiceIDResponse struct {
