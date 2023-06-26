@@ -1,4 +1,4 @@
-# terraform
+# Clickhouse
 
 <!-- Start SDK Installation -->
 ## SDK Installation
