@@ -94,6 +94,7 @@ internal/sdk/pkg/models/shared/apikeypostrequest.go
 internal/sdk/pkg/models/shared/apikeyhashdata.go
 internal/sdk/pkg/models/shared/servicepostresponse.go
 internal/sdk/pkg/models/shared/servicepostrequest.go
+internal/sdk/pkg/models/shared/security.go
 USAGE.md
 internal/provider/provider.go
 internal/provider/service_resource.go

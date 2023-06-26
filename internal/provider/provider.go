@@ -4,6 +4,7 @@ package provider
 
 import (
 	"clickhouse/internal/sdk"
+	"clickhouse/internal/sdk/pkg/models/shared"
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -25,6 +26,8 @@ type ClickhouseProvider struct {
 // ClickhouseProviderModel describes the provider data model.
 type ClickhouseProviderModel struct {
 	ServerURL types.String `tfsdk:"server_url"`
+	Password  types.String `tfsdk:"password"`
+	Username  types.String `tfsdk:"username"`
 }
 
 func (p *ClickhouseProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
@@ -39,6 +42,14 @@ func (p *ClickhouseProvider) Schema(ctx context.Context, req provider.SchemaRequ
 				MarkdownDescription: "Server URL (defaults to https://api.clickhouse.cloud)",
 				Optional:            true,
 				Required:            false,
+			},
+			"password": schema.StringAttribute{
+				Optional:  true,
+				Sensitive: true,
+			},
+			"username": schema.StringAttribute{
+				Optional:  true,
+				Sensitive: true,
 			},
 		},
 	}
@@ -59,8 +70,16 @@ func (p *ClickhouseProvider) Configure(ctx context.Context, req provider.Configu
 		ServerURL = "https://api.clickhouse.cloud"
 	}
 
+	password := data.Password.ValueString()
+	username := data.Username.ValueString()
+	security := shared.Security{
+		Password: password,
+		Username: username,
+	}
+
 	opts := []sdk.SDKOption{
 		sdk.WithServerURL(ServerURL),
+		sdk.WithSecurity(security),
 	}
 	client := sdk.New(opts...)
 

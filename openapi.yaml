@@ -1635,3 +1635,9 @@ components:
       required:
         - email
         - role
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+security:
+  - APIKey: []

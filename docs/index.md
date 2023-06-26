@@ -17,4 +17,6 @@ description: |-
 
 ### Optional
 
+- `password` (String, Sensitive)
 - `server_url` (String) Server URL (defaults to https://api.clickhouse.cloud)
+- `username` (String, Sensitive)
