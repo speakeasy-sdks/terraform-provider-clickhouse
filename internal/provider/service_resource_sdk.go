@@ -22,18 +22,8 @@ func (r *ServiceResourceModel) ToCreateSDKType() *shared.ServicePostRequest {
 	} else {
 		cloudProvider = nil
 	}
-	idleScaling := new(bool)
-	if !r.IdleScaling.IsUnknown() && !r.IdleScaling.IsNull() {
-		*idleScaling = r.IdleScaling.ValueBool()
-	} else {
-		idleScaling = nil
-	}
-	idleTimeoutMinutes := new(float64)
-	if !r.IdleTimeoutMinutes.IsUnknown() && !r.IdleTimeoutMinutes.IsNull() {
-		*idleTimeoutMinutes, _ = r.IdleTimeoutMinutes.ValueBigFloat().Float64()
-	} else {
-		idleTimeoutMinutes = nil
-	}
+	idleScaling := r.IdleScaling.ValueBool()
+	idleTimeoutMinutes, _ := r.IdleTimeoutMinutes.ValueBigFloat().Float64()
 	ipAccessList := make([]shared.IPAccessListEntry, 0)
 	for _, ipAccessListItem := range r.IPAccessList {
 		description := new(string)
@@ -53,36 +43,11 @@ func (r *ServiceResourceModel) ToCreateSDKType() *shared.ServicePostRequest {
 			Source:      source,
 		})
 	}
-	maxTotalMemoryGb := new(float64)
-	if !r.MaxTotalMemoryGb.IsUnknown() && !r.MaxTotalMemoryGb.IsNull() {
-		*maxTotalMemoryGb, _ = r.MaxTotalMemoryGb.ValueBigFloat().Float64()
-	} else {
-		maxTotalMemoryGb = nil
-	}
-	minTotalMemoryGb := new(float64)
-	if !r.MinTotalMemoryGb.IsUnknown() && !r.MinTotalMemoryGb.IsNull() {
-		*minTotalMemoryGb, _ = r.MinTotalMemoryGb.ValueBigFloat().Float64()
-	} else {
-		minTotalMemoryGb = nil
-	}
-	name := new(string)
-	if !r.Name.IsUnknown() && !r.Name.IsNull() {
-		*name = r.Name.ValueString()
-	} else {
-		name = nil
-	}
-	region := new(shared.ServicePostRequestRegion)
-	if !r.Region.IsUnknown() && !r.Region.IsNull() {
-		*region = shared.ServicePostRequestRegion(r.Region.ValueString())
-	} else {
-		region = nil
-	}
-	tier := new(shared.ServicePostRequestTier)
-	if !r.Tier.IsUnknown() && !r.Tier.IsNull() {
-		*tier = shared.ServicePostRequestTier(r.Tier.ValueString())
-	} else {
-		tier = nil
-	}
+	maxTotalMemoryGb, _ := r.MaxTotalMemoryGb.ValueBigFloat().Float64()
+	minTotalMemoryGb, _ := r.MinTotalMemoryGb.ValueBigFloat().Float64()
+	name := r.Name.ValueString()
+	region := shared.ServicePostRequestRegion(r.Region.ValueString())
+	tier := shared.ServicePostRequestTier(r.Tier.ValueString())
 	out := shared.ServicePostRequest{
 		BackupID:           backupID,
 		CloudProvider:      cloudProvider,
@@ -105,9 +70,7 @@ func (r *ServiceResourceModel) ToGetSDKType() *shared.ServicePostRequest {
 
 func (r *ServiceResourceModel) ToUpdateSDKType() *shared.ServicePatchRequest {
 	var ipAccessList *shared.IPAccessListPatch
-	if r.IPAccessList != nil {
-		ipAccessList = &shared.IPAccessListPatch{}
-	}
+	ipAccessList = &shared.IPAccessListPatch{}
 	name := new(string)
 	if !r.Name.IsUnknown() && !r.Name.IsNull() {
 		*name = r.Name.ValueString()

@@ -1410,6 +1410,16 @@ components:
           description: Name of the organization.
     ServicePostRequest:
       x-speakeasy-entity: Service
+      required:
+        - name
+        - provider
+        - region
+        - tier
+        - ipAccessList
+        - minTotalMemoryGb
+        - maxTotalMemoryGb
+        - idleScaling
+        - idleTimeoutMinutes
       properties:
         name:
           type: string

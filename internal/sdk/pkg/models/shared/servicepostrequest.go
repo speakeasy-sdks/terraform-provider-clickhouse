@@ -130,19 +130,19 @@ type ServicePostRequest struct {
 	// Cloud provider
 	CloudProvider *ServicePostRequestCloudProvider `json:"provider,omitempty"`
 	// When set to true the service is allowed to scale down to zero when idle. Always true for development services.
-	IdleScaling *bool `json:"idleScaling,omitempty"`
+	IdleScaling bool `json:"idleScaling"`
 	// Set minimum idling timeout (in minutes). Must be &gt;= 5 minutes.
-	IdleTimeoutMinutes *float64 `json:"idleTimeoutMinutes,omitempty"`
+	IdleTimeoutMinutes float64 `json:"idleTimeoutMinutes"`
 	// List of IP addresses allowed to access the service
-	IPAccessList []IPAccessListEntry `json:"ipAccessList,omitempty"`
+	IPAccessList []IPAccessListEntry `json:"ipAccessList"`
 	// Maximum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and lower than 360 for non paid services or 720 for paid services.
-	MaxTotalMemoryGb *float64 `json:"maxTotalMemoryGb,omitempty"`
+	MaxTotalMemoryGb float64 `json:"maxTotalMemoryGb"`
 	// Minimum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and greater than 24.
-	MinTotalMemoryGb *float64 `json:"minTotalMemoryGb,omitempty"`
+	MinTotalMemoryGb float64 `json:"minTotalMemoryGb"`
 	// Name of the service.
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Service region.
-	Region *ServicePostRequestRegion `json:"region,omitempty"`
+	Region ServicePostRequestRegion `json:"region"`
 	// Tier of the service: 'development', 'production', 'dedicated_high_mem', 'dedicated_high_cpu', 'dedicated_standard'. Production services scale, Development are fixed size.
-	Tier *ServicePostRequestTier `json:"tier,omitempty"`
+	Tier ServicePostRequestTier `json:"tier"`
 }
