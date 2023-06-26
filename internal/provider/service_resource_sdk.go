@@ -3,9 +3,9 @@
 package provider
 
 import (
+	"clickhouse/internal/sdk/pkg/models/shared"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"math/big"
-	"terraform/internal/sdk/pkg/models/shared"
 	"time"
 )
 

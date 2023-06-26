@@ -5,4 +5,4 @@ generation:
 terraform:
   version: 0.0.1
   author: speakeasy
-  packageName: terraform
+  packageName: clickhouse

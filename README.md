@@ -8,14 +8,14 @@ To install this provider, copy and paste this code into your Terraform configura
 ```hcl
 terraform {
   required_providers {
-    terraform = {
-      source  = "speakeasy/terraform"
+    clickhouse = {
+      source  = "speakeasy/clickhouse"
       version = "0.0.1"
     }
   }
 }
 
-provider "terraform" {
+provider "clickhouse" {
   # Configuration options
 }
 ```

@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"terraform/internal/sdk/pkg/types"
+	"clickhouse/internal/sdk/pkg/types"
 )
 
 const (

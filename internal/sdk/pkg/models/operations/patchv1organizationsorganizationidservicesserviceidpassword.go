@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"clickhouse/internal/sdk/pkg/models/shared"
 	"net/http"
-	"terraform/internal/sdk/pkg/models/shared"
 )
 
 type PatchV1OrganizationsOrganizationIDServicesServiceIDPasswordRequest struct {

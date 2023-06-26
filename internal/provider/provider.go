@@ -3,8 +3,8 @@
 package provider
 
 import (
+	"clickhouse/internal/sdk"
 	"context"
-	"terraform/internal/sdk"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
@@ -13,26 +13,26 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
-var _ provider.Provider = &TerraformProvider{}
+var _ provider.Provider = &ClickhouseProvider{}
 
-type TerraformProvider struct {
+type ClickhouseProvider struct {
 	// version is set to the provider version on release, "dev" when the
 	// provider is built and ran locally, and "test" when running acceptance
 	// testing.
 	version string
 }
 
-// TerraformProviderModel describes the provider data model.
-type TerraformProviderModel struct {
+// ClickhouseProviderModel describes the provider data model.
+type ClickhouseProviderModel struct {
 	ServerURL types.String `tfsdk:"server_url"`
 }
 
-func (p *TerraformProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
-	resp.TypeName = "terraform"
+func (p *ClickhouseProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
+	resp.TypeName = "clickhouse"
 	resp.Version = p.version
 }
 
-func (p *TerraformProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
+func (p *ClickhouseProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"server_url": schema.StringAttribute{
@@ -44,8 +44,8 @@ func (p *TerraformProvider) Schema(ctx context.Context, req provider.SchemaReque
 	}
 }
 
-func (p *TerraformProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
-	var data TerraformProviderModel
+func (p *ClickhouseProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
+	var data ClickhouseProviderModel
 
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 
@@ -68,20 +68,20 @@ func (p *TerraformProvider) Configure(ctx context.Context, req provider.Configur
 	resp.ResourceData = client
 }
 
-func (p *TerraformProvider) Resources(ctx context.Context) []func() resource.Resource {
+func (p *ClickhouseProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		NewServiceResource,
 		NewUserResource,
 	}
 }
 
-func (p *TerraformProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
+func (p *ClickhouseProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{}
 }
 
 func New(version string) func() provider.Provider {
 	return func() provider.Provider {
-		return &TerraformProvider{
+		return &ClickhouseProvider{
 			version: version,
 		}
 	}

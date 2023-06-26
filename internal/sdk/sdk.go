@@ -4,12 +4,12 @@ package sdk
 
 import (
 	"bytes"
+	"clickhouse/internal/sdk/pkg/models/operations"
+	"clickhouse/internal/sdk/pkg/utils"
 	"context"
 	"fmt"
 	"io"
 	"net/http"
-	"terraform/internal/sdk/pkg/models/operations"
-	"terraform/internal/sdk/pkg/utils"
 	"time"
 )
 

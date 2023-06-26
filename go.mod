@@ -1,4 +1,4 @@
-module terraform
+module clickhouse
 
 go 1.18
 
