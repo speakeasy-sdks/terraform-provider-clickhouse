@@ -26,4 +26,5 @@ provider "clickhouse" {
 
 resource "clickhouse_service" "test" {
   organization_id = var.orgID
+
 }
