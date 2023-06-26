@@ -599,7 +599,7 @@ paths:
                     description: Detailed error description.
   "/v1/organizations/{organizationId}/members/{userId}":
     get:
-      x-speakeasy-entity-operation: User#read
+#      x-speakeasy-entity-operation: User#read
       summary: Get member details
       description: Returns a single organization member details.
       parameters:
@@ -639,7 +639,7 @@ paths:
                     type: string
                     description: Detailed error description.
     patch:
-      x-speakeasy-entity-operation: User#update
+#      x-speakeasy-entity-operation: User#update
       summary: Update organization member.
       description: Updates organization member role.
       parameters:
@@ -698,6 +698,7 @@ paths:
         - in: path
           required: true
           name: userId
+          x-speakeasy-match: id
           description: ID of the requested user.
           schema:
             type: string
@@ -1170,6 +1171,7 @@ components:
           description: Timestamp the member joined the organization. ISO-8601.
           format: date-time
     Invitation:
+      x-speakeasy-entity: User
       properties:
         role:
           type: string
@@ -1178,7 +1180,6 @@ components:
             - admin
             - developer
         id:
-          x-speakeasy-terraform-ignore: true
           type: string
           description: Unique invitation ID.
           format: uuid
@@ -1474,7 +1475,7 @@ components:
             - admin
             - developer
     InvitationPostRequest:
-      #x-speakeasy-entity: User
+      x-speakeasy-entity: User
       properties:
         email:
           type: string

@@ -90,6 +90,7 @@ func (p *ClickhouseProvider) Configure(ctx context.Context, req provider.Configu
 func (p *ClickhouseProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		NewServiceResource,
+		NewUserResource,
 	}
 }
 

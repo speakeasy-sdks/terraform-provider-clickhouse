@@ -44,3 +44,10 @@ resource "clickhouse_service" "test" {
   region = "us-central1"
   tier   = "development"
 }
+
+
+resource "clickhouse_user" "test_user" {
+  organization_id = var.orgID
+  email           = "bot@speakeasyapi.dev"
+  role            = "admin"
+}

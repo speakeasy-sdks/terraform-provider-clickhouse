@@ -205,7 +205,6 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDInvitationsInvitationID(ctx con
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -285,7 +284,6 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, 
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -365,7 +363,6 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDMembersUserID(ctx context.Conte
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -445,7 +442,6 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDServicesServiceID(ctx context.C
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -525,7 +521,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivities(ctx context.Context, re
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -624,7 +619,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivitiesActivityID(ctx context.C
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -723,7 +717,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitations(ctx context.Context, r
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -822,7 +815,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitationsInvitationID(ctx contex
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -921,7 +913,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeys(ctx context.Context, request 
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1020,7 +1011,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, req
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1119,7 +1109,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembers(ctx context.Context, reque
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1218,7 +1207,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembersUserID(ctx context.Context,
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1317,7 +1305,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceID(ctx context.Cont
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1416,7 +1403,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackups(ctx conte
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1515,7 +1501,6 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupID(c
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1621,7 +1606,6 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, r
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1727,7 +1711,6 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDMembersUserID(ctx context.Contex
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1833,7 +1816,6 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceID(ctx context.Co
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -1939,7 +1921,6 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDPassword(ctx co
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -2045,7 +2026,6 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDScaling(ctx con
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -2151,7 +2131,6 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDState(ctx conte
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -2257,7 +2236,6 @@ func (s *SDK) PostV1OrganizationsOrganizationIDInvitations(ctx context.Context, 
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -2363,7 +2341,6 @@ func (s *SDK) PostV1OrganizationsOrganizationIDKeys(ctx context.Context, request
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 
@@ -2469,7 +2446,6 @@ func (s *SDK) PostV1OrganizationsOrganizationIDServices(ctx context.Context, req
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-	httpRes.Request.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	contentType := httpRes.Header.Get("Content-Type")
 

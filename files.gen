@@ -99,4 +99,6 @@ USAGE.md
 internal/provider/provider.go
 internal/provider/service_resource.go
 internal/provider/service_resource_sdk.go
+internal/provider/user_resource.go
+internal/provider/user_resource_sdk.go
 internal/sdk/pkg/models/operations/options.go

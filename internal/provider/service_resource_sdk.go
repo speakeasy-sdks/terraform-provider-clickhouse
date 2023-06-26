@@ -70,7 +70,9 @@ func (r *ServiceResourceModel) ToGetSDKType() *shared.ServicePostRequest {
 
 func (r *ServiceResourceModel) ToUpdateSDKType() *shared.ServicePatchRequest {
 	var ipAccessList *shared.IPAccessListPatch
-	ipAccessList = &shared.IPAccessListPatch{}
+	if r.IPAccessList != nil {
+		ipAccessList = &shared.IPAccessListPatch{}
+	}
 	name := new(string)
 	if !r.Name.IsUnknown() && !r.Name.IsNull() {
 		*name = r.Name.ValueString()

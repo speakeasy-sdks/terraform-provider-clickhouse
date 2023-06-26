@@ -122,21 +122,24 @@ func (r *ServiceResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Description: `Unique service ID.`,
 			},
 			"idle_scaling": schema.BoolAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplace(),
 				},
-				Required:    true,
+				Optional:    true,
 				Description: `When set to true the service is allowed to scale down to zero when idle. Always true for development services.`,
 			},
 			"idle_timeout_minutes": schema.NumberAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.Number{
 					numberplanmodifier.RequiresReplace(),
 				},
-				Required:    true,
+				Optional:    true,
 				Description: `Set minimum idling timeout (in minutes). Must be &gt;= 5 minutes.`,
 			},
 			"ip_access_list": schema.ListNestedAttribute{
-				Required: true,
+				Computed: true,
+				Optional: true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
@@ -168,7 +171,8 @@ func (r *ServiceResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Description: `Minimum total memory of all workers during auto-scaling in Gb. Available only for 'production' services. Must be a multiple of 12 and greater than 24.`,
 			},
 			"name": schema.StringAttribute{
-				Required:    true,
+				Computed:    true,
+				Optional:    true,
 				Description: `Name of the service.`,
 			},
 			"organization_id": schema.StringAttribute{
@@ -183,10 +187,11 @@ func (r *ServiceResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Description: `Password for the newly created service.`,
 			},
 			"region": schema.StringAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-				Required: true,
+				Optional: true,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"ap-south-1",
@@ -224,10 +229,11 @@ func (r *ServiceResource) Schema(ctx context.Context, req resource.SchemaRequest
 					`Current state of the service.`,
 			},
 			"tier": schema.StringAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-				Required: true,
+				Optional: true,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"development",
