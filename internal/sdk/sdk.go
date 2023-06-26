@@ -174,10 +174,10 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDInvitationsInvitationID(ctx con
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -254,10 +254,10 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, 
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -334,10 +334,10 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDMembersUserID(ctx context.Conte
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -414,10 +414,10 @@ func (s *SDK) DeleteV1OrganizationsOrganizationIDServicesServiceID(ctx context.C
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -494,10 +494,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivities(ctx context.Context, re
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -593,10 +593,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDActivitiesActivityID(ctx context.C
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -692,10 +692,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitations(ctx context.Context, r
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -791,10 +791,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDInvitationsInvitationID(ctx contex
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -890,10 +890,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeys(ctx context.Context, request 
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -989,10 +989,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, req
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1088,10 +1088,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembers(ctx context.Context, reque
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1187,10 +1187,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDMembersUserID(ctx context.Context,
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1286,10 +1286,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceID(ctx context.Cont
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1385,10 +1385,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackups(ctx conte
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1484,10 +1484,10 @@ func (s *SDK) GetV1OrganizationsOrganizationIDServicesServiceIDBackupsBackupID(c
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1590,10 +1590,10 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDKeysKeyID(ctx context.Context, r
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1696,10 +1696,10 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDMembersUserID(ctx context.Contex
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1802,10 +1802,10 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceID(ctx context.Co
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -1908,10 +1908,10 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDPassword(ctx co
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -2014,10 +2014,10 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDScaling(ctx con
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -2120,10 +2120,10 @@ func (s *SDK) PatchV1OrganizationsOrganizationIDServicesServiceIDState(ctx conte
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -2226,10 +2226,10 @@ func (s *SDK) PostV1OrganizationsOrganizationIDInvitations(ctx context.Context, 
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -2332,10 +2332,10 @@ func (s *SDK) PostV1OrganizationsOrganizationIDKeys(ctx context.Context, request
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}
@@ -2438,10 +2438,10 @@ func (s *SDK) PostV1OrganizationsOrganizationIDServices(ctx context.Context, req
 		retryConfig = &utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 5000,
-				MaxInterval:     60000,
+				InitialInterval: 250,
+				MaxInterval:     10000,
 				Exponent:        1.5,
-				MaxElapsedTime:  150000,
+				MaxElapsedTime:  10000,
 			},
 			RetryConnectionErrors: true,
 		}

@@ -1146,7 +1146,7 @@ components:
           type: string
           description: Name of the organization.
     Member:
-      x-speakeasy-entity: User
+      #x-speakeasy-entity: User
       properties:
         userId:
           type: string
@@ -1178,6 +1178,7 @@ components:
             - admin
             - developer
         id:
+          x-speakeasy-terraform-ignore: true
           type: string
           description: Unique invitation ID.
           format: uuid
@@ -1187,10 +1188,12 @@ components:
             join using the invitation. The email is stored in a lowercase form.
           format: email
         createdAt:
+          x-speakeasy-terraform-ignore: true
           type: string
           description: Invitation creation timestamp. ISO-8601.
           format: date-time
         expireAt:
+          x-speakeasy-terraform-ignore: true
           type: string
           description: Timestamp the invitation expires. ISO-8601.
           format: date-time
@@ -1462,7 +1465,7 @@ components:
             - enabled
             - disabled
     MemberPatchRequest:
-      x-speakeasy-entity: User
+      #x-speakeasy-entity: User
       properties:
         role:
           type: string
@@ -1471,7 +1474,7 @@ components:
             - admin
             - developer
     InvitationPostRequest:
-      x-speakeasy-entity: User
+      #x-speakeasy-entity: User
       properties:
         email:
           type: string
@@ -1494,9 +1497,9 @@ components:
 x-speakeasy-retries:
   strategy: backoff
   backoff:
-    initialInterval: 5000 # 5 seconds
-    maxInterval: 60000 # 60 seconds
-    maxElapsedTime: 150000 # 2.5 minutes
+    initialInterval: 250 # 250 ms
+    maxInterval: 10000 # 10 seconds
+    maxElapsedTime: 10000 # 10 seconds
     exponent: 1.5
   statusCodes:
     - 4XX
